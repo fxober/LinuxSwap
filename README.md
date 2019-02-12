@@ -31,7 +31,9 @@ So configure your kernel with these .config settings if you are able to compile 
 
 6. If you are seeing nvme block merges you probably don't want these and you probably want to set your nvme block size to 4Kib not 512b sectors, if you are still seeing merges then you might want to try.
 
-First check the nomerges value -
+ First check the nomerges value
+ 
  #cat /sys/block/<nvme>/queue/nomerges
- if it's not already 2, then do:
- echo 2 > /sys/block/<nvme>/queue/nomerges`
+ 
+ if it's not already 2, then change it to two:
+ echo 2 > /sys/block/<nvme>/queue/nomerges
