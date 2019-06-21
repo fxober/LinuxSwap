@@ -10,9 +10,9 @@ https://kernelnewbies.org/Linux_4.14
 
 Best Practices for Configuration:
 
-1. Use one (1) Optane or Storage Class Memory SSD that support high write traffic SSDs for each Numa Node (cpu socket). So in a two socket system you would use two. 
+1. Use at least one (1) Optane or Storage Class Memory SSD that support high write traffic SSDs for each Numa Node (cpu socket). So in a two socket system you would use two. 
 
-2. The Linux kernel can at most support 28 "swap partitions" so 14 per SSD assuming you use two= SSDs for two socket server. So 28 swap partitions is recommended and set the partition priority equal if you can, using syntax like this, all with the same exact priority/ swapon –p 10 /dev/nvme01p1
+2. The Linux kernel can at most support 28 "swap partitions" so 14 per SSD assuming you use two SSDs for two socket server, 4 SSDs would be even better. So 28 swap partitions is recommended and set the partition priority equal if you can, using syntax like this, all with the same exact priority/ swapon –p 10 /dev/nvme[n]p1
 
 3. We need to avoid RCU call back processing in softirq from blocking for a long time and cause long latency. The rcu processings are offloaded to dedicated kthreads.  Set the following kernel config.
 a.	CONFIG_RCU_NOCB_CPU=y  
